@@ -78,3 +78,5 @@ rm -f /tmp/configmysql.sql
 echo "restore dump from ${PATHTOSQLDUMP}"
 mysql -u sisuser -psispass sisdb < $PATHTOSQLDUMP
 echo "All done! Please, check your app on ${SERVERNAME}:${PORT}"
+
+#Created by Punko <Punkoivan@yandex.ru> on 05.05.2016
