@@ -1,0 +1,1 @@
+{"rsync":{"/var/www/html":{"type":"rsync","guestpath":"/var/www/html","hostpath":"/home/ivan/SoftServe/courses/demof/src","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}},"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/ivan/SoftServe/courses/demof","disabled":false,"__vagrantfile":true}}}
