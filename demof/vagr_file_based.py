@@ -9,8 +9,8 @@ template_machine = '''
   end
   '''
 
-startip = 100
-startport = 8080
+startip = 101
+startport = 8081
 
 base_file = open('Vagrantfile2')
 base_data = base_file.read()
