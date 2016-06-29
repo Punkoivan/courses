@@ -2,6 +2,8 @@ __author__ = 'sergy'
 import sys
 import re
 import subprocess
+import urllib
+import urllib2
 
 template_machine = '''
   config.vm.define "node%nodenum%" do |n%nodenum%|
@@ -23,6 +25,8 @@ current_machines = int(current_machines_raw[0].split(' ')[1].strip())
 
 command = sys.argv[-1]
 #command = 'remove' # only for testing
+#command = 'remove'
+#command = 'add'
 if command == 'add':
     machines_configs = ''
     for i in range(1, current_machines + 2):
@@ -40,6 +44,18 @@ if command == 'add':
     print(err)
     print('<<>>')
     print('Return code:' + str(rc))
+
+    #post to server
+    url = 'http://127.0.0.1:9999/add'
+    values = {'node_name': 'node' + str(current_machines + 1),
+              'ip_addres': '192.168.0.' + str(startip + current_machines + 1),
+              'port': str(startport + current_machines + 1)}
+
+    data = urllib.urlencode(values)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+
 elif command == 'remove':
     machines_configs = ''
     for i in range(1, current_machines):
@@ -57,5 +73,17 @@ elif command == 'remove':
     print(err)
     print('<<>>')
     print('Return code:' + str(rc))
+
+    # post to server
+    url = 'http://127.0.0.1:9999/remove'
+    values = {'node_name': 'node' + str(current_machines),
+              'ip_addres': '192.168.0.' + str(startip + current_machines),
+              'port': str(startport + current_machines)}
+    print(values)
+
+    data = urllib.urlencode(values)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
 else:
     print('aviable commands: "add" and "remove"')
